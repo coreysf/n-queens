@@ -77,13 +77,16 @@ window.findNQueensSolution = function(n) {
   var solution;
   var allSolutions=[];
 
+
     var fullQueensArray = function(n) {
       var solutionCount = 0;
       var board = new Board({n: n});
+      var a;
       var findSolution = function(startingColumn) {
         if (startingColumn === n) {
+          a = JSON.stringify(board.rows());
           solutionCount++;
-          console.log(JSON.stringify(board.rows()));
+
           return;
         }
 
@@ -92,26 +95,19 @@ window.findNQueensSolution = function(n) {
           if (!board.hasAnyColConflicts() && !board.hasAnyRowConflicts() && !board.hasAnyMajorDiagonalConflicts() && !board.hasAnyMinorDiagonalConflicts())
           {
             findSolution(startingColumn + 1);
+            allSolutions.push(board.rows());
           } 
           board.togglePiece(i, startingColumn);
         }
       };
       
       findSolution(0);
-
+      a = JSON.parse(a);
       console.log('Number of solutions for ' + n + ' queens:', solutionCount);
-      return solutionCount;
+      return a[0];
   };
-
-  //var allSolutions = fullQueensArray(n);
-    fullQueensArray(n);
-   solution = allSolutions[0];
-
-  console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
-  return solution;
+  return fullQueensArray(n);
 };
-
-
 
 
 
