@@ -173,7 +173,6 @@
       var iterations = rowlength-y;
 
       for(var i = 1 - rowlength; i <= rowlength - 1; x++, y++, i++) {
-        console.log("rowIndex: " + x + "; colIndex: " + y);
         if(this._isInBounds(x, y) && allRows[x][y]===1){
           counter++;
           if(counter>1){
